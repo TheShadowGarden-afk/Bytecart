@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCart — Deals, Reviews & Best Buys</title>
+  <meta name="description" content="ByteCart — Best deals, reviews and product comparisons across all categories." />
+  <!-- ADD YOUR ADSENSE code here later (follow instructions below) -->
+  <!-- Example placeholder (do NOT paste your real AdSense into public code until you know placement): -->
+  <!-- <script data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" class="brand-link">
+        <img src="assets/logo.svg" alt="ByteCart logo" class="logo">
+      </a>
+      <div class="brand-text">
+        <h1>ByteCart</h1>
+        <small>Shop smart • Buy with confidence</small>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <input id="searchInput" type="search" placeholder="Search products, brands, categories..." />
+      <button id="themeToggle" title="Toggle theme">🌓</button>
+      <a href="#" class="cta">Login</a>
+      <a href="#" class="cta cart">Cart (0)</a>
+    </div>
+  </header>
+
+  <nav id="categoryNav" class="category-nav"></nav>
+
+  <main>
+    <!-- HERO CAROUSEL -->
+    <section class="hero">
+      <div class="carousel" id="carousel"></div>
+      <div class="hero-overlay">
+        <h2>Today's top deals across categories</h2>
+        <p>Handpicked products, trusted reviews, and quick buy links.</p>
+      </div>
+    </section>
+
+    <!-- FEATURED & AD SLOT -->
+    <section class="container">
+      <div class="featured-left">
+        <h3>Featured Deals</h3>
+        <div id="featuredGrid" class="product-grid"></div>
+      </div>
+
+      <aside class="ad-column">
+        <!-- AdSense slot placeholder -->
+        <div class="adbox">Ad slot 300x250 (Paste AdSense code here)</div>
+        <div class="adbox">Ad slot 300x250</div>
+      </aside>
+    </section>
+
+    <!-- MIXED CATEGORIES -->
+    <section class="container">
+      <h3 style="width:100%;">Explore Categories</h3>
+      <div id="categoryCards" class="category-cards"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <h4>About ByteCart</h4>
+      <p>ByteCart is an affiliate shopping guide — we help you find the best products and deals. We may earn a commission on purchases made through affiliate links.</p>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <p><a href="contact.html">Contact</a> • <a href="about.html">About</a> • <a href="blog.html">Blog</a></p>
+    </div>
+  </footer>
+
+  <!-- data and logic -->
+  <script src="js/products.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
