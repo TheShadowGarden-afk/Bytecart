@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — ByteCart</title>
+  <meta name="description" content="Contact ByteCart for partnership, queries or support." />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html"><img src="assets/logo.svg" alt="ByteCart logo" class="logo"></a>
+      <div class="brand-text"><h1>ByteCart</h1><small>Shop smart • Buy with confidence</small></div>
+    </div>
+    <div class="header-actions">
+      <a href="index.html" class="cta">Home</a>
+      <a href="about.html" class="cta">About</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Contact ByteCart</h1>
+    <p>If you need help or want to propose a collaboration, send us an email:</p>
+    <p><strong>Email:</strong> <a href="mailto:theshadowgardenafk@gmail.com">theshadowgardenafk@gmail.com</a></p>
+
+    <h3>Quick message</h3>
+    <!-- Visual contact form (non-functional) -->
+    <form onsubmit="alert('Thank you — this demo form is not connected. Please email us at theshadowgardenafk@gmail.com'); return false;">
+      <label>Your name</label><br>
+      <input type="text" name="name" required style="width:100%;padding:10px;margin-bottom:8px;border-radius:6px;border:1px solid #ccc">
+      <label>Email</label><br>
+      <input type="email" name="email" required style="width:100%;padding:10px;margin-bottom:8px;border-radius:6px;border:1px solid #ccc">
+      <label>Message</label><br>
+      <textarea name="message" rows="6" required style="width:100%;padding:10px;border-radius:6px;border:1px solid #ccc"></textarea>
+      <br><br>
+      <button type="submit" class="buy-btn">Send Message</button>
+    </form>
+
+    <h3>Mailing address</h3>
+    <p>ByteCart (online) — contact via email is preferred.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div>© <span id="yearFooter2"></span> ByteCart</div>
+    <div><a href="privacy.html">Privacy Policy</a></div>
+  </footer>
+
+  <script>document.getElementById('yearFooter2').innerText = new Date().getFullYear();</script>
+</body>
+</html>
