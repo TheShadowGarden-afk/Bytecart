@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 320 64">
+  <rect rx="8" ry="8" width="64" height="48" x="0" y="8" fill="#e53935"/>
+  <path d="M14 18 L34 18 L34 42 L14 42 Z" fill="#fff"/>
+  <text x="84" y="40" font-family="Verdana, Arial" font-weight="700" font-size="26" fill="#e53935">ByteCart</text>
+</svg>
