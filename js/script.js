@@ -1,21 +1,24 @@
-// js/script.js — upgraded ByteCart logic (uses products.js)
+// js/script.js — ByteCart UI script
 const AMAZON_TAG = "theshadowgard-21"; // your affiliate tag
 
-// helper
-const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
+// small helpers
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function slugify(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
 
 // build category nav
-function buildCategories() {
-  if (typeof products === 'undefined') return;
-  const cats = Array.from(new Set(products.map(p => p.category)));
+function buildCategories(){
+  if (!window.products) return;
+  const cats = Array.from(new Set(window.products.map(p=>p.category)));
   const nav = document.getElementById('categoryNav');
-  nav.innerHTML = cats.map(c => `<div class="category-pill" data-cat="${c}">${c.replace(/-/g,' ')}</div>`).join('');
-  nav.addEventListener('click', e => {
-    if (e.target.classList.contains('category-pill')) {
+  if(!nav) return;
+  nav.innerHTML = cats.map(c=>`<div class="category-pill" data-cat="${c}">${c.replace(/-/g,' ')}</div>`).join('');
+  nav.addEventListener('click', e=>{
+    if(e.target.classList.contains('category-pill')){
       const cat = e.target.dataset.cat;
-      renderProducts(cat);
-      window.scrollTo({top: 420, behavior:'smooth'});
+      renderProducts(cat, 18);
+      window.scrollTo({top:420,behavior:'smooth'});
     }
   });
 }
@@ -26,74 +29,98 @@ const CAROUSEL_IMAGES = [
   "https://m.media-amazon.com/images/I/71LZcGvYwaL._SL1500_.jpg",
   "https://m.media-amazon.com/images/I/81x4Yq1Jm-L._SL1500_.jpg"
 ];
-function buildCarousel() {
-  const carousel = document.getElementById('carousel');
-  if (!carousel) return;
-  carousel.innerHTML = CAROUSEL_IMAGES.map(src => `<img src="${src}" alt="">`).join('');
+function buildCarousel(){
+  const c = document.getElementById('carousel');
+  if(!c) return;
+  c.innerHTML = CAROUSEL_IMAGES.map(src=>`<img src="${src}" alt="">`).join('');
   let idx=0;
-  setInterval(()=> {
-    idx = (idx+1) % CAROUSEL_IMAGES.length;
-    carousel.style.transform = `translateX(-${idx*100}%)`;
-  },3500);
+  setInterval(()=>{ idx=(idx+1)%CAROUSEL_IMAGES.length; c.style.transform=`translateX(-${idx*100}%)`; },3500);
 }
 
-// render products into featured grid (shows top N or filter by category)
-function renderProducts(category=null, max=12) {
-  const grid = document.getElementById('featuredGrid');
-  if (!grid || typeof products === 'undefined') return;
-  let list = products.slice();
-  if (category) list = list.filter(p => p.category === category);
-  // show first max items
-  list = list.slice(0, max);
-  grid.innerHTML = list.map(p => productCardHtml(p)).join('');
-  renderCategoryCards(); // update category cards counts
-}
-
-function productCardHtml(p) {
+// product card HTML
+function productCardHtml(p){
   const url = p.affiliateLink && p.affiliateLink !== '#AFF_LINK#'
     ? p.affiliateLink
     : `https://www.amazon.in/s?k=${encodeURIComponent(p.title)}&tag=${AMAZON_TAG}`;
   return `
     <div class="product-card" data-id="${p.id}">
-      <img src="${p.img}" alt="${escapeHtml(p.title)}">
+      <img src="${p.img}" alt="${escapeHtml(p.title)}" loading="lazy">
       <p class="p-title">${escapeHtml(p.title)}</p>
       <p class="p-desc">${escapeHtml(p.desc)}</p>
       <p class="p-price">${escapeHtml(p.price)}</p>
       <div class="buy-row">
         <a class="buy-btn" href="${url}" target="_blank" rel="noopener">Buy on Amazon</a>
-        <a class="buy-btn secondary" href="/products/${slugify(p.title)}.html">Details</a>
+        <button class="buy-btn secondary" onclick="openProductModal('${p.id}')">Details</button>
       </div>
     </div>
   `;
 }
 
-// render category cards
+// render products (category optional)
+function renderProducts(category=null, max=12){
+  const grid = document.getElementById('featuredGrid');
+  if(!grid || !window.products) return;
+  let list = window.products.slice();
+  if(category) list = list.filter(p=>p.category===category);
+  grid.innerHTML = list.slice(0,max).map(p=>productCardHtml(p)).join('');
+  renderCategoryCards();
+}
+
+// category cards list
 function renderCategoryCards(){
   const el = document.getElementById('categoryCards');
-  if(!el) return;
-  const cats = Array.from(new Set(products.map(p=>p.category)));
-  el.innerHTML = cats.map(c => {
-    const count = products.filter(p=>p.category===c).length;
-    return `<div class="cat-card"><h4>${c.replace(/-/g,' ')}</h4><p>${count} products</p><a href="#" onclick="renderProducts('${c}');window.scrollTo(420,420);return false" class="buy-btn secondary">View</a></div>`;
+  if(!el || !window.products) return;
+  const cats = Array.from(new Set(window.products.map(p=>p.category)));
+  el.innerHTML = cats.map(c=>{
+    const n = window.products.filter(p=>p.category===c).length;
+    return `<div class="cat-card"><h4>${c.replace(/-/g,' ')}</h4><p>${n} products</p><a href="#" class="buy-btn secondary" onclick="renderProducts('${c}', 24);window.scrollTo({top:420,behavior:'smooth'});return false">View</a></div>`;
   }).join('');
 }
 
-// search implementation
+// modal details
+function openProductModal(id){
+  const p = window.products.find(x=>x.id===id);
+  if(!p) return;
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  const url = p.affiliateLink && p.affiliateLink !== '#AFF_LINK#'
+    ? p.affiliateLink
+    : `https://www.amazon.in/s?k=${encodeURIComponent(p.title)}&tag=${AMAZON_TAG}`;
+  modal.innerHTML = `
+    <div class="card">
+      <div style="display:flex;gap:18px;flex-wrap:wrap">
+        <img src="${p.img}" style="max-width:360px;object-fit:contain"/>
+        <div style="flex:1">
+          <h2>${escapeHtml(p.title)}</h2>
+          <p style="color:var(--muted)">${escapeHtml(p.desc)}</p>
+          <p class="p-price">${escapeHtml(p.price)}</p>
+          <p><a class="buy-btn" href="${url}" target="_blank" rel="noopener">Buy on Amazon</a></p>
+        </div>
+      </div>
+      <p style="text-align:right;margin-top:12px"><button class="buy-btn secondary" onclick="this.closest('.modal').remove()">Close</button></p>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+// search
 function setupSearch(){
   const input = document.getElementById('searchInput');
-  if (!input) return;
-  input.addEventListener('input', ()=> {
+  if(!input) return;
+  input.addEventListener('input', ()=>{
     const q = input.value.trim().toLowerCase();
+    if(!q){ renderProducts(null, 12); return; }
+    const filtered = window.products.filter(p => (p.title + " " + p.desc).toLowerCase().includes(q));
     const grid = document.getElementById('featuredGrid');
-    if (!q) { renderProducts(); return; }
-    const filtered = products.filter(p => (p.title + " " + p.desc).toLowerCase().includes(q));
-    grid.innerHTML = filtered.length ? filtered.map(p=>productCardHtml(p)).join('') : '<p style="padding:20px;color:#999">No products found</p>';
+    grid.innerHTML = filtered.length ? filtered.map(p=>productCardHtml(p)).join('') : '<p style="padding:20px;color:var(--muted)">No products found</p>';
   });
 }
 
-// utility
-function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+// theme toggle (simple)
+function setupThemeToggle(){
+  const btn = document.getElementById('themeToggle');
+  btn && btn.addEventListener('click', ()=> document.body.classList.toggle('dark'));
+}
 
 // init
 window.addEventListener('DOMContentLoaded', ()=>{
@@ -102,5 +129,5 @@ window.addEventListener('DOMContentLoaded', ()=>{
   renderProducts();
   renderCategoryCards();
   setupSearch();
+  setupThemeToggle();
 });
-
