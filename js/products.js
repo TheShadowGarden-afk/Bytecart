@@ -1,14 +1,9 @@
-// js/products.js
-// ByteCart product database — expanded for 3 categories:
+// js/products.js — ByteCart product database (expanded)
 // Categories: smartphones, laptops, home-appliances
-// Each item contains: id, title, category, price (text), rating, desc, img, affiliateLink
-// Affiliate links use your tag via search pages (safe, trackable).
-// Later we can replace with PA-API direct ASIN links and official images.
-
-const AMAZON_TAG = "theshadowgard-21";
+const AMAZON_TAG = "theshadowgard-21"; // your tag
 
 const products = [
-  // =========== SMARTPHONES (20 items) ===========
+  // SMARTPHONES (20)
   { id: "sm-001", title: "Samsung Galaxy S23", category: "smartphones", price: "See on Amazon", rating: 4.6, desc: "Flagship Samsung phone with great camera and performance.", img: "https://via.placeholder.com/420x300?text=Galaxy+S23", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Samsung Galaxy S23")}&tag=${AMAZON_TAG}` },
   { id: "sm-002", title: "iPhone 14", category: "smartphones", price: "See on Amazon", rating: 4.6, desc: "Apple iPhone 14 with excellent camera and ecosystem.", img: "https://via.placeholder.com/420x300?text=iPhone+14", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("iPhone 14")}&tag=${AMAZON_TAG}` },
   { id: "sm-003", title: "OnePlus 11", category: "smartphones", price: "See on Amazon", rating: 4.5, desc: "High performance OnePlus flagship with fast charging.", img: "https://via.placeholder.com/420x300?text=OnePlus+11", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("OnePlus 11")}&tag=${AMAZON_TAG}` },
@@ -21,7 +16,7 @@ const products = [
   { id: "sm-010", title: "OPPO Reno 10", category: "smartphones", price: "See on Amazon", rating: 4.0, desc: "Good value for mid-range users.", img: "https://via.placeholder.com/420x300?text=OPPO+Reno+10", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("OPPO Reno 10")}&tag=${AMAZON_TAG}` },
   { id: "sm-011", title: "Samsung Galaxy A54", category: "smartphones", price: "See on Amazon", rating: 4.2, desc: "Great battery life and smooth display.", img: "https://via.placeholder.com/420x300?text=Galaxy+A54", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Samsung Galaxy A54")}&tag=${AMAZON_TAG}` },
   { id: "sm-012", title: "Poco X6 Pro", category: "smartphones", price: "See on Amazon", rating: 4.1, desc: "High performance at a competitive price.", img: "https://via.placeholder.com/420x300?text=Poco+X6+Pro", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Poco X6 Pro")}&tag=${AMAZON_TAG}` },
-  { id: "sm-013", title: "Samsung Galaxy Note 20 (refurb)", category: "smartphones", price: "See on Amazon", rating: 4.0, desc: "Classic power user device (check condition).", img: "https://via.placeholder.com/420x300?text=Galaxy+Note+20", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Samsung Galaxy Note 20")}&tag=${AMAZON_TAG}` },
+  { id: "sm-013", title: "Samsung Galaxy Note 20", category: "smartphones", price: "See on Amazon", rating: 4.0, desc: "Classic power user device (check condition).", img: "https://via.placeholder.com/420x300?text=Galaxy+Note+20", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Samsung Galaxy Note 20")}&tag=${AMAZON_TAG}` },
   { id: "sm-014", title: "Infinix Note 30", category: "smartphones", price: "See on Amazon", rating: 3.9, desc: "Large display and good battery for price.", img: "https://via.placeholder.com/420x300?text=Infinix+Note+30", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Infinix Note 30")}&tag=${AMAZON_TAG}` },
   { id: "sm-015", title: "Nokia G21", category: "smartphones", price: "See on Amazon", rating: 3.8, desc: "Durable design and stock-like Android.", img: "https://via.placeholder.com/420x300?text=Nokia+G21", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Nokia G21")}&tag=${AMAZON_TAG}` },
   { id: "sm-016", title: "Tecno Camon 20", category: "smartphones", price: "See on Amazon", rating: 3.9, desc: "Camera focused budget phone.", img: "https://via.placeholder.com/420x300?text=Tecno+Camon+20", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Tecno Camon 20")}&tag=${AMAZON_TAG}` },
@@ -30,7 +25,7 @@ const products = [
   { id: "sm-019", title: "Asus Zenfone 9", category: "smartphones", price: "See on Amazon", rating: 4.3, desc: "Compact flagship with flagship chipset.", img: "https://via.placeholder.com/420x300?text=Asus+Zenfone+9", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Asus Zenfone 9")}&tag=${AMAZON_TAG}` },
   { id: "sm-020", title: "POCO F5", category: "smartphones", price: "See on Amazon", rating: 4.2, desc: "Great specs for gamers and power users.", img: "https://via.placeholder.com/420x300?text=POCO+F5", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("POCO F5")}&tag=${AMAZON_TAG}` },
 
-  // =========== LAPTOPS (15 items) ===========
+  // LAPTOPS (15)
   { id: "lp-001", title: "HP Victus Gaming Laptop (Ryzen 5)", category: "laptops", price: "See on Amazon", rating: 4.2, desc: "Good starter gaming laptop with dedicated GPU.", img: "https://via.placeholder.com/420x300?text=HP+Victus+Ryzen+5", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("HP Victus Gaming Laptop Ryzen 5")}&tag=${AMAZON_TAG}` },
   { id: "lp-002", title: "Dell Inspiron 14 (Intel i5)", category: "laptops", price: "See on Amazon", rating: 4.1, desc: "Reliable daily driver for students and professionals.", img: "https://via.placeholder.com/420x300?text=Dell+Inspiron+14", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Dell Inspiron 14 i5")}&tag=${AMAZON_TAG}` },
   { id: "lp-003", title: "Lenovo IdeaPad Slim 3 (Ryzen 5)", category: "laptops", price: "See on Amazon", rating: 4.0, desc: "Lightweight laptop for productivity tasks.", img: "https://via.placeholder.com/420x300?text=Lenovo+IdeaPad+Slim+3", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Lenovo IdeaPad Slim 3 Ryzen 5")}&tag=${AMAZON_TAG}` },
@@ -47,7 +42,7 @@ const products = [
   { id: "lp-014", title: "Acer Nitro 5", category: "laptops", price: "See on Amazon", rating: 4.1, desc: "Budget gaming with good cooling.", img: "https://via.placeholder.com/420x300?text=Acer+Nitro+5", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Acer Nitro 5")}&tag=${AMAZON_TAG}` },
   { id: "lp-015", title: "Microsoft Surface Laptop Go", category: "laptops", price: "See on Amazon", rating: 4.0, desc: "Portable, premium-feel laptop for professionals.", img: "https://via.placeholder.com/420x300?text=Surface+Laptop+Go", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Surface Laptop Go")}&tag=${AMAZON_TAG}` },
 
-  // =========== HOME APPLIANCES (15 items) ===========
+  // HOME APPLIANCES (15)
   { id: "ha-001", title: "Philips Air Fryer Daily Collection 1.8L", category: "home-appliances", price: "See on Amazon", rating: 4.4, desc: "Healthy frying with less oil.", img: "https://via.placeholder.com/420x300?text=Philips+Air+Fryer", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Philips Air Fryer 1.8L")}&tag=${AMAZON_TAG}` },
   { id: "ha-002", title: "IFB 5 Star Fully Automatic Washing Machine 7kg", category: "home-appliances", price: "See on Amazon", rating: 4.3, desc: "Top-rated Indian washing machine.", img: "https://via.placeholder.com/420x300?text=IFB+Washing+Machine", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("IFB 7kg washing machine")}&tag=${AMAZON_TAG}` },
   { id: "ha-003", title: "Whirlpool 265 L 3 Star Refrigerator", category: "home-appliances", price: "See on Amazon", rating: 4.2, desc: "Reliable refrigerator with inverter compressor.", img: "https://via.placeholder.com/420x300?text=Whirlpool+Fridge", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Whirlpool 265 L refrigerator")}&tag=${AMAZON_TAG}` },
@@ -65,5 +60,6 @@ const products = [
   { id: "ha-015", title: "Preethi Mixer Grinder (3 jars)", category: "home-appliances", price: "See on Amazon", rating: 4.0, desc: "Popular Indian brand mixer grinder.", img: "https://via.placeholder.com/420x300?text=Preethi+Mixer+Grinder", affiliateLink: `https://www.amazon.in/s?k=${encodeURIComponent("Preethi mixer grinder 3 jars")}&tag=${AMAZON_TAG}` }
 ];
 
-// Export for CommonJS if needed
+// make products global (for older browsers)
+if (typeof window !== 'undefined') window.products = products;
 if (typeof module !== 'undefined') module.exports = products;
